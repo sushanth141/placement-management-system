@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/axios';
 
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '');
+
 const INITIAL_FORM = {
   title: '', description: '', location: '', salary: '',
   type: 'full-time', deadline: '',
@@ -267,16 +269,14 @@ export default function CompanyDashboard() {
                     <div style={{ background: 'var(--bg-secondary)', padding: '0.75rem', borderRadius: 'var(--radius-sm)', display: 'grid', gap: '0.5rem', marginBottom: '0.5rem' }}>
                       <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>📄 Student Documents</div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        {app.student?.profile?.resume ? (
-                          <a href={`http://localhost:5000${app.student.profile.resume}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>📑 Resume</a>
-                        ) : <span className="chip" style={{ background: 'transparent', border: '1px dashed var(--border)' }}>No Resume</span>}
-                        
-                        {app.student?.profile?.photo ? (
-                          <a href={`http://localhost:5000${app.student.profile.photo}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>🖼️ Photo</a>
-                        ) : <span className="chip" style={{ background: 'transparent', border: '1px dashed var(--border)' }}>No Photo</span>}
-                        
+                        {app.student?.profile?.resume && (
+                          <a href={`${BASE_URL}${app.student.profile.resume}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>📄 Resume</a>
+                        )}
+                        {app.student?.profile?.photo && (
+                          <a href={`${BASE_URL}${app.student.profile.photo}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>📸 Photo</a>
+                        )}
                         {app.student?.profile?.aadharProof ? (
-                          <a href={`http://localhost:5000${app.student.profile.aadharProof}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>🪪 Aadhar</a>
+                          <a href={`${BASE_URL}${app.student.profile.aadharProof}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}>🆔 Aadhar</a>
                         ) : <span className="chip" style={{ background: 'transparent', border: '1px dashed var(--border)' }}>No Aadhar</span>}
                       </div>
                     </div>

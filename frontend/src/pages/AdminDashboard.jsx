@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/axios';
 
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '');
+
 function Sidebar({ activeTab, setActiveTab, user, logout }) {
   const nav = [
     { id: 'overview', icon: '📊', label: 'Overview' },
@@ -425,9 +427,9 @@ export default function AdminDashboard() {
                         <td style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{new Date(app.createdAt).toLocaleDateString()}</td>
                         <td>
                           <div style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap', maxWidth: 120 }}>
-                            {app.student?.profile?.resume && <a href={`http://localhost:5000${app.student.profile.resume}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ padding: '0.1rem 0.3rem', fontSize: '0.7rem' }}>📑 Resume</a>}
-                            {app.student?.profile?.photo && <a href={`http://localhost:5000${app.student.profile.photo}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ padding: '0.1rem 0.3rem', fontSize: '0.7rem' }}>🖼️ Photo</a>}
-                            {app.student?.profile?.aadharProof && <a href={`http://localhost:5000${app.student.profile.aadharProof}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ padding: '0.1rem 0.3rem', fontSize: '0.7rem' }}>🪪 Aadhar</a>}
+                            {app.student?.profile?.resume && <a href={`${BASE_URL}${app.student.profile.resume}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ padding: '0.1rem 0.3rem', fontSize: '0.7rem' }}>📄 Resume</a>}
+                            {app.student?.profile?.photo && <a href={`${BASE_URL}${app.student.profile.photo}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ padding: '0.1rem 0.3rem', fontSize: '0.7rem' }}>📸 Photo</a>}
+                            {app.student?.profile?.aadharProof && <a href={`${BASE_URL}${app.student.profile.aadharProof}`} target="_blank" rel="noreferrer" className="btn btn-sm" style={{ padding: '0.1rem 0.3rem', fontSize: '0.7rem' }}>🆔 Aadhar</a>}
                             {!app.student?.profile?.resume && !app.student?.profile?.photo && !app.student?.profile?.aadharProof && <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>None</span>}
                           </div>
                         </td>
