@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-
+import api from '../api/axios';
 const ROLE_REDIRECT = {
   student: '/student/dashboard',
   admin: '/admin/dashboard',
@@ -24,13 +24,7 @@ export default function Login() {
     setForgotLoading(true);
     setForgotMsg('');
     try {
-      // Use standard fetch since it doesn't need auth context
-      const res = await fetch('http://localhost:5000/api/auth/forgot-password-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: forgotEmail })
-      });
-      const data = await res.json();
+      const { data } = await api.post('/auth/forgot-password-request', { email: forgotEmail });
       setForgotMsg(data.message);
       setForgotEmail('');
     } catch (err) {
