@@ -1,7 +1,5 @@
 # 🎓 Placement Management System
 
-**🚀 Live Demo:** [Click here to view the live website!](https://placement-management-system-git-main-s141.vercel.app)
-
 A comprehensive SaaS-based Placement Management System connecting students, companies, and college administrators. Features include automated application tracking, centralized company dashboards for job postings, and an admin console for seamless coordination.
 
 ## 🌟 Features
